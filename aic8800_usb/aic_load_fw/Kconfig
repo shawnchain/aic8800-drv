@@ -1,5 +1,5 @@
-config AIC_LOADFW_SUPPORT
-	tristate "AIC8800 Load Firmware Support"
+config AIC_LOADFW_USB_SUPPORT
+	tristate "AIC8800 Load Firmware Support (USB)"
 	help
-	  This is support for aic load firmware driver.
+	  This is support for aic load firmware usb driver.
 

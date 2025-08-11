@@ -4,9 +4,10 @@ EXTRA_CFLAGS += -Wno-implicit-fallthrough
 
 RWNX_VERS_NUM := 6.4.3.0
 
-CONFIG_AIC8800_WLAN_SUPPORT = m
-MODULE_NAME = aic8800_fdrv
 CONFIG_COUNTRY_CODE = "00"
+
+MODULE_NAME = aic8800_fdrv_usb
+CONFIG_AIC8800_WLAN_USB_SUPPORT ?= m
 
 # Support of bootrom start
 CONFIG_START_FROM_BOOTROM = y
@@ -30,8 +31,6 @@ CONFIG_RWNX_FHOST ?= n
 #
 # DEBUG OPTIONS
 CONFIG_RWNX_UM_HELPER_DFLT ?= "/dini/dini_bin/rwnx_umh.sh"
-CONFIG_AIC_FW_PATH = "/vendor/etc/firmware"
-export CONFIG_AIC_FW_PATH
 
 #
 # FW ARCH:
@@ -137,7 +136,7 @@ CONFIG_RWNX_SW_PROFILING ?= n
 CONFIG_RWNX_DBG ?= y
 BR_NAME = br0
 
-obj-$(CONFIG_AIC8800_WLAN_SUPPORT) := $(MODULE_NAME).o
+obj-$(CONFIG_AIC8800_WLAN_USB_SUPPORT) := $(MODULE_NAME).o
 $(MODULE_NAME)-y := \
 	rwnx_msg_tx.o          \
 	rwnx_msg_rx.o          \
@@ -216,6 +215,7 @@ ccflags-$(CONFIG_COEX) += -DCONFIG_COEX
 
 ccflags-y += -DCONFIG_RWNX_FULLMAC
 ccflags-y += -I$(src)/.
+ccflags-y += -DCONFIG_AIC_FW_PATH=\"$(CONFIG_AIC_FW_8800_USB_PATH)\"
 ccflags-$(CONFIG_RWNX_RADAR) += -DCONFIG_RWNX_RADAR
 ccflags-$(CONFIG_RWNX_MON_DATA) += -DCONFIG_RWNX_MON_DATA
 ccflags-$(CONFIG_RWNX_MON_XMIT) += -DCONFIG_RWNX_MON_XMIT

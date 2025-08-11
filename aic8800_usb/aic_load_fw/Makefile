@@ -16,10 +16,12 @@ CONFIG_PLATFORM_ALLWINNER ?= n
 CONFIG_PLATFORM_AMLOGIC ?= n
 CONFIG_PLATFORM_UBUNTU ?= y
 
-CONFIG_AIC_LOADFW_SUPPORT = m
-MODULE_NAME = aic_load_fw
+CONFIG_AIC_LOADFW_USB_SUPPORT ?= m
+MODULE_NAME = aic00_load_fw_usb
 # CONFIG_AIC_FW_PATH = "/vendor/etc/firmware"
 # export CONFIG_AIC_FW_PATH
+
+ccflags-y += -DCONFIG_AIC_FW_PATH=\"$(CONFIG_AIC_FW_8800_USB_PATH)\"
 
 ifeq ($(CONFIG_USB_SUPPORT), y)
 ccflags-y += -DAICWF_USB_SUPPORT
@@ -35,7 +37,7 @@ ccflags-$(CONFIG_PREALLOC_RX_SKB) += -DCONFIG_PREALLOC_RX_SKB
 ccflags-$(CONFIG_PREALLOC_TXQ) += -DCONFIG_PREALLOC_TXQ
 
 
-obj-$(CONFIG_AIC_LOADFW_SUPPORT) := $(MODULE_NAME).o
+obj-$(CONFIG_AIC_LOADFW_USB_SUPPORT) := $(MODULE_NAME).o
 $(MODULE_NAME)-y := 	aic_bluetooth_main.o \
 					aicbluetooth.o \
 					aicwf_usb.o \

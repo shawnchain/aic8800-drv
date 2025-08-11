@@ -1,7 +1,7 @@
-config AIC8800_WLAN_SUPPORT
-	tristate "AIC8800 wlan Support"
+config AIC8800_WLAN_USB_SUPPORT
+	tristate "AIC8800 wlan Driver (USB)"
 	help
-	  This is support for aic wifi driver.
+	  This is support for aic wifi usb driver.
 
 #choice
 #        depends on AIC8800_WLAN_SUPPORT

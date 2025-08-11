@@ -1,10 +1,17 @@
-config AIC_WLAN_SUPPORT
-	bool "AIC wireless Support"
+config AIC8800_WLAN_USB
+	bool "AIC8800 wireless USB Support"
 	default n
 	help
-	  This is support for aic wireless chip.
+	  This is support for aic wireless usb chip.
 
-if AIC_WLAN_SUPPORT
-source "drivers/net/wireless/aic8800/aic8800_fdrv/Kconfig"
-source "drivers/net/wireless/aic8800/aic_load_fw/Kconfig"
+config AIC_FW_8800_USB_PATH
+	depends on AIC8800_WLAN_USB
+	string "AIC8800 USB Firmware & config file path"
+	default "/lib/firmware/aic8800_usb"
+	help
+	  Path to the aic8800 generic usb firmware & config file.	
+
+if AIC8800_WLAN_USB
+source "drivers/net/wireless/aic8800_usb/aic8800_fdrv/Kconfig"
+source "drivers/net/wireless/aic8800_usb/aic_load_fw/Kconfig"
 endif
