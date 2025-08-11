@@ -1,6 +1,8 @@
-CONFIG_AIC8800_BTLPM_SUPPORT = m
+CONFIG_AIC8800_BTLPM_SDIO_SUPPORT ?= m
 
-obj-$(CONFIG_AIC8800_BTLPM_SUPPORT) := aic8800_btlpm.o
+MODULE_NAME = aic8800_btlpm_sdio
+
+obj-$(CONFIG_AIC8800_BTLPM_SDIO_SUPPORT) := $(MODULE_NAME).o
 
 ccflags-y += -I$(srctree)/$(src)/../aic8800_bsp
 
@@ -15,12 +17,12 @@ CONFIG_PLATFORM_UBUNTU ?= y
 CONFIG_SUPPORT_LPM = y
 CONFIG_AUTO_PM ?= n
 
-aic8800_btlpm-y := \
+$(MODULE_NAME)-y := \
 	aic_bluetooth_main.o \
 	rfkill.o \
 
 ifeq ($(CONFIG_PLATFORM_UBUNTU), n)
-	aic8800_btlpm-$(CONFIG_SUPPORT_LPM) += lpm.o
+	$(MODULE_NAME)-$(CONFIG_SUPPORT_LPM) += lpm.o
 endif
 
 ccflags-y += -DAIC_TRACE_INCLUDE_PATH=$(src)

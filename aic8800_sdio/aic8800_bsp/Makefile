@@ -1,14 +1,16 @@
 EXTRA_CFLAGS += -Wno-unused-function
 
+CONFIG_AIC8800_WLAN_SDIO_SUPPORT ?= m
+
 CONFIG_SDIO_SUPPORT := y
 CONFIG_SDIO_PWRCTRL := y
 # CONFIG_AIC_FW_PATH = "/vendor/etc/firmware"
 # CONFIG_AIC_FW_PATH = "/lib/firmware/aic8800dc_fw"
 # CONFIG_AIC_FW_PATH = "/oem/usr/ko/aic8800dc_fw"
-export CONFIG_AIC_FW_PATH
-ccflags-y += -DCONFIG_AIC_FW_PATH=\"$(CONFIG_AIC_FW_PATH)\"
+# export CONFIG_AIC_FW_PATH
+ccflags-y += -DCONFIG_AIC_FW_PATH=\"$(CONFIG_AIC_FW_8800DC_SDIO_PATH)\"
 
-MODULE_NAME := aic8800_bsp
+MODULE_NAME := aic8800_bsp_sdio
 ifeq ($(CONFIG_SDIO_SUPPORT), y)
 ccflags-y += -DAICWF_SDIO_SUPPORT
 ccflags-$(CONFIG_SDIO_PWRCTRL) += -DCONFIG_SDIO_PWRCTRL
@@ -49,7 +51,7 @@ ccflags-$(CONFIG_FORCE_DPD_CALIB) += -DCONFIG_FORCE_DPD_CALIB -DCONFIG_DPD
 ccflags-$(CONFIG_RESV_MEM_SUPPORT) += -DCONFIG_RESV_MEM_SUPPORT
 ccflags-$(CONFIG_AMSDU_RX) += -DCONFIG_AMSDU_RX
 
-obj-m := $(MODULE_NAME).o
+obj-$(CONFIG_AIC8800_WLAN_SDIO_SUPPORT) := $(MODULE_NAME).o
 $(MODULE_NAME)-y := \
 	aic8800dc_compat.o \
 	aic8800d80_compat.o \

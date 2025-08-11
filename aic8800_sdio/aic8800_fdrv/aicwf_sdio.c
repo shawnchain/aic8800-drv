@@ -1537,7 +1537,7 @@ void aicwf_sdio_aggrbuf_reset(struct aicwf_tx_priv *tx_priv)
 	atomic_set(&tx_priv->aggr_count, 0);
 }
 
-extern void set_irq_handler(void *fn);
+extern void sdio_set_irq_handler(void *fn);
 
 static int aicwf_sdio_bus_start(struct device *dev)
 {
@@ -1550,7 +1550,7 @@ static int aicwf_sdio_bus_start(struct device *dev)
 #ifndef CONFIG_FDRV_NO_REG_SDIO
 	sdio_claim_irq(sdiodev->func, aicwf_sdio_hal_irqhandler);
 #else
-    set_irq_handler(aicwf_sdio_hal_irqhandler);  
+    sdio_set_irq_handler(aicwf_sdio_hal_irqhandler);  
 #endif
     if(sdiodev->chipid == PRODUCT_ID_AIC8800D80){
         sdio_f0_writeb(sdiodev->func, 0x07, 0x04, &ret);

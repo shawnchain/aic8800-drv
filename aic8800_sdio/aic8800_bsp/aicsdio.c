@@ -1942,7 +1942,7 @@ fail:
 	return NULL;
 }
 
-void get_fw_path(char* fw_path){
+void sdio_get_fw_path(char* fw_path){
 	if (strlen(aic_fw_path) > 0) {
 		memcpy(fw_path, aic_fw_path, strlen(aic_fw_path));
 	}else{
@@ -1950,7 +1950,7 @@ void get_fw_path(char* fw_path){
 	}
 }
 
-int get_testmode(void){
+int sdio_get_testmode(void){
 	return testmode;
 }
 
@@ -1958,7 +1958,7 @@ struct sdio_func *get_sdio_func(void){
     return aicbsp_sdiodev->func;
 }
 
-void set_irq_handler(void *fn){
+void sdio_set_irq_handler(void *fn){
     aicbsp_sdiodev->sdio_hal_irqhandler = (sdio_irq_handler_t *)fn;
 }
 
@@ -1986,8 +1986,8 @@ uint8_t crc8_ponl_107(uint8_t *p_buffer, uint16_t cal_size)
     return crc;
 }
 
-EXPORT_SYMBOL(get_fw_path);
-EXPORT_SYMBOL(get_testmode);
+EXPORT_SYMBOL(sdio_get_fw_path);
+EXPORT_SYMBOL(sdio_get_testmode);
 EXPORT_SYMBOL(get_sdio_func);
-EXPORT_SYMBOL(set_irq_handler);
+EXPORT_SYMBOL(sdio_set_irq_handler);
 

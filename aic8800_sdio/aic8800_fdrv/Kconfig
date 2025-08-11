@@ -1,5 +1,5 @@
-config AIC8800_WLAN_SUPPORT
-	tristate "AIC8800 wlan Support"
+config AIC8800_WLAN_SDIO_SUPPORT
+	tristate "AIC8800 wlan Driver (SDIO)"
 	help
-	  This is support for aic wifi driver.
+	  This is support for aic wifi sdio driver.
 
