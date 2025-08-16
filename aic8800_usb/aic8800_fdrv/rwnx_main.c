@@ -521,7 +521,8 @@ extern uint8_t p2p_working;
 struct semaphore aicwf_deinit_sem;
 atomic_t aicwf_deinit_atomic;
 
-int aicwf_dbg_level = LOGERROR|LOGINFO;
+// int aicwf_dbg_level = LOGERROR|LOGINFO;
+int aicwf_dbg_level = LOGERROR;
 module_param(aicwf_dbg_level, int, 0660);
 
 int testmode = 0;
