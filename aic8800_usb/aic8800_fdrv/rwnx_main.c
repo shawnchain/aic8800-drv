@@ -6997,7 +6997,7 @@ static void rwnx_reg_notifier(struct wiphy *wiphy,
 {
     struct rwnx_hw *rwnx_hw = wiphy_priv(wiphy);
 
-    printk("%s Enter\r\n", __func__);
+    AICWFDBG(LOGTRACE, "%s Enter", __func__);
 
     // For now trust all initiator
     rwnx_radar_set_domain(&rwnx_hw->radar, request->dfs_region);
