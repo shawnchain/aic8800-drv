@@ -4,11 +4,14 @@ CONFIG_AIC_LOADFW_USB_SUPPORT ?= $(CONFIG_AIC8800_WLAN_USB_SUPPORT)
 
 obj-$(CONFIG_AIC_LOADFW_USB_SUPPORT)    += aic_load_fw/
 obj-$(CONFIG_AIC8800_WLAN_USB_SUPPORT) += aic8800_fdrv/
+obj-$(CONFIG_AIC8800_BTUSB_SUPPORT) += aic8800_btusb/
 
 ########## config option ##########
 export CONFIG_USE_FW_REQUEST = n
 export CONFIG_PREALLOC_RX_SKB = y
 export CONFIG_PREALLOC_TXQ = y
+export CONFIG_USB_RX_REASSEMBLE = y
+export CONFIG_USE_5G = n
 ###################################
 
 ########## platform support list ##########
