@@ -584,6 +584,10 @@ static void aicwf_usb_msg_rx_complete(struct urb *urb)
     struct sk_buff *skb = NULL;
     unsigned long flags = 0;
 
+#ifdef CONFIG_USB_RX_REASSEMBLE
+    bool pkt_check = false;
+#endif
+
     skb = usb_buf->skb;
     usb_buf->skb = NULL;
 
@@ -614,7 +618,7 @@ static void aicwf_usb_msg_rx_complete(struct urb *urb)
         skb_put(skb, urb->actual_length);
 
 #ifdef CONFIG_USB_RX_REASSEMBLE
-        bool pkt_check = false;
+        pkt_check = false;
         if (rx_priv->rx_msg_reassemble_skb) {
             u32 frag_len = skb->len;
             struct sk_buff *reassemble_skb = rx_priv->rx_msg_reassemble_skb;
@@ -669,6 +673,7 @@ static void aicwf_usb_msg_rx_complete(struct urb *urb)
             bool pkt_drop = false;
             u8 type = skb->data[2];
             u32 pkt_len = skb->data[0] | (skb->data[1] << 8);
+            struct sk_buff *reassemble_skb = NULL;
             if ((type & USB_TYPE_CFG) != USB_TYPE_CFG) {
                 usb_err("invalid msg pkt, type=0x%x, len=%u/%u\n", type, pkt_len, skb->len);;
                 pkt_drop = true;
@@ -677,7 +682,7 @@ static void aicwf_usb_msg_rx_complete(struct urb *urb)
                     u32 pkt_total_len = ALIGN((pkt_len + 4), 4);
                     if ((pkt_total_len > AICWF_USB_MSG_MAX_PKT_SIZE) && (skb->len == AICWF_USB_MSG_MAX_PKT_SIZE)) {
                         AICWFDBG(LOGINFO, "reassemble msg pkt, len=%u\n", pkt_total_len);
-                        struct sk_buff *reassemble_skb = __dev_alloc_skb(pkt_total_len, GFP_ATOMIC/*GFP_KERNEL*/);
+                        reassemble_skb = __dev_alloc_skb(pkt_total_len, GFP_ATOMIC/*GFP_KERNEL*/);
                         if (reassemble_skb) {
                             memcpy(reassemble_skb->data, skb->data, skb->len);
                             skb_put(reassemble_skb, skb->len);
