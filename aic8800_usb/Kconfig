@@ -9,7 +9,7 @@ config AIC_FW_8800_USB_PATH
 	string "AIC8800 USB Firmware & config file path"
 	default "/lib/firmware/aic8800_usb"
 	help
-	  Path to the aic8800 generic usb firmware & config file.	
+	  Path to the aic8800 generic usb firmware & config file.
 
 if AIC8800_WLAN_USB
 source "drivers/net/wireless/aic8800_usb/aic8800_fdrv/Kconfig"

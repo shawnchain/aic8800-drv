@@ -1226,6 +1226,7 @@ struct mm_set_agg_disable_req
 {
     u8_l disable;
     u8_l staidx;
+    u8_l disable_rx;
 };
 
 struct mm_set_coex_req

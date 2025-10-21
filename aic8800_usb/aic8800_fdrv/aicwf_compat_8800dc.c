@@ -1995,7 +1995,7 @@ int aicwf_patch_table_load(struct rwnx_hw *rwnx_hw, char *filename)
 
     if (!err && (i < size)) {
         for (i =(128/4); i < (size/4); i +=2) {
-            AICWFDBG(LOGINFO, "patch_tbl:  %x  %x\n", dst[i], dst[i+1]);
+            AICWFDBG(LOGERROR, "patch_tbl:  %x  %x\n", dst[i], dst[i+1]);
             err = rwnx_send_dbg_mem_write_req(rwnx_hw, dst[i], dst[i+1]);
         }
         if (err) {
@@ -2690,7 +2690,7 @@ void system_config_8800dc(struct rwnx_hw *rwnx_hw){
 		AICWFDBG(LOGERROR, "%x rd fail: %d\n", mem_addr, ret);
         return;
     }
-    chip_id = (u8)(rd_mem_addr_cfm.memdata >> 16);
+    chip_id = rd_mem_addr_cfm.memdata >> 16;
     //printk("%x=%x\n", rd_mem_addr_cfm.memaddr, rd_mem_addr_cfm.memdata);
     if (((rd_mem_addr_cfm.memdata >> 25) & 0x01UL) == 0x00UL) {
         chip_mcu_id = 1;
