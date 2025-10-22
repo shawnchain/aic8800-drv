@@ -2968,8 +2968,6 @@ int aicwf_set_rf_config_8800dc(struct rwnx_hw *rwnx_hw, struct mm_set_rf_calib_c
 	return 0 ;
 }
 
-extern char aic_fw_path[200];
-
 int aicwf_plat_patch_load_8800dc(struct rwnx_hw *rwnx_hw)
 {
     int ret = 0;
@@ -3069,7 +3067,7 @@ int aicwf_misc_ram_valid_check_8800dc(struct rwnx_hw *rwnx_hw, int *valid_out)
         return ret;
     }
     misc_ram_addr = cfm.memdata;
-    AICWFDBG(LOGERROR, "misc_ram_addr=%x\n", misc_ram_addr);
+    AICWFDBG(LOGINFO, "misc_ram_addr=%x\n", misc_ram_addr);
     // bit_mask
     ram_base_addr = misc_ram_addr + offsetof(rf_misc_ram_t, bit_mask);
     ram_word_cnt = (MEMBER_SIZE(rf_misc_ram_t, bit_mask) + MEMBER_SIZE(rf_misc_ram_t, reserved)) / 4;

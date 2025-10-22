@@ -278,9 +278,9 @@ static int aic_load_firmware(u32 ** fw_buf, const char *name, struct device *dev
         if (usb_dev->chipid == PRODUCT_ID_AIC8800) {
             len = snprintf(path, FW_PATH_MAX, "%s/%s/%s",aic_default_fw_path, "aic8800", name);
         } else if (usb_dev->chipid == PRODUCT_ID_AIC8800D80) {
-            len = snprintf(path, FW_PATH_MAX, "%s/%s/%s",aic_default_fw_path, "aic8800D80", name);
+            len = snprintf(path, FW_PATH_MAX, "%s/%s/%s",aic_default_fw_path, "aic8800d80", name);
         } else if (usb_dev->chipid == PRODUCT_ID_AIC8800D80X2) {
-            len = snprintf(path, FW_PATH_MAX, "%s/%s/%s",aic_default_fw_path, "aic8800D80X2", name);
+            len = snprintf(path, FW_PATH_MAX, "%s/%s/%s",aic_default_fw_path, "aic8800d80x2", name);
         }else {
             printk("%s unknown chipid %d\n", __func__, usb_dev->chipid);
         }

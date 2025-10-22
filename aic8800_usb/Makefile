@@ -10,16 +10,30 @@ obj-$(CONFIG_AIC8800_BTUSB_SUPPORT) += aic8800_btusb/
 export CONFIG_USE_FW_REQUEST = n
 export CONFIG_PREALLOC_RX_SKB = y
 export CONFIG_PREALLOC_TXQ = y
-export CONFIG_USB_RX_REASSEMBLE = y
-export CONFIG_USE_5G = n
+
+export CONFIG_USB_RX_REASSEMBLE = n
+export CONFIG_USE_5G = y
+export CONFIG_FOR_IPCAM = n
+
+export CONFIG_USB_NO_TRANS_DMA_MAP = n
+export CONFIG_ALIGN_8BYTES = y
+export CONFIG_USB_ALIGN_DATA = y
+
+export CONFIG_RX_TASKLET = n
+export CONFIG_TX_TASKLET = n
+export CONFIG_RX_NETIF_RECV_SKB = y
+
+export CONFIG_RWNX_P2P_DEBUGFS = n
+export CONFIG_RWNX_DEBUGFS = y
+export CONFIG_RWNX_DBG = y
 ###################################
 
 ########## platform support list ##########
-export CONFIG_PLATFORM_ROCKCHIP = n
+export CONFIG_PLATFORM_ROCKCHIP = y
 export CONFIG_PLATFORM_ALLWINNER = n
 export CONFIG_PLATFORM_AMLOGIC = n
 export CONFIG_PLATFORM_HI = n
-export CONFIG_PLATFORM_UBUNTU = y
+export CONFIG_PLATFORM_UBUNTU = n
 
 ifeq ($(CONFIG_PLATFORM_ROCKCHIP), y)
 ARCH = arm64
